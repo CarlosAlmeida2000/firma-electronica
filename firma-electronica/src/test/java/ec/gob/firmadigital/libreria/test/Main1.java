@@ -85,10 +85,10 @@ public class Main1 {
     // ARCHIVO
    // private static final String PKCS12 = "C:\\firmasjr\\VERA.p12";
    // private static final String PASSWORD = "Vera2025";
-    private static final String PKCS12 = "C:\\firmasjr\\EDUARDO.p12";
+    private static final String PKCS12 = "D:\\firma_ciad.p12";
     //private static final String PASSWORD = "Ganchozo90";
     //private static final String PASSWORD = "Solorozano77";
-    private static final String PASSWORD = "Eduardo1993";
+    private static final String PASSWORD = "Carlos2025";
     //private static final String PASSWORD = "ReyeS1994";
     //private static final String PASSWORD = "Erick1994";
    // private static final String PASSWORD = "Tano2020";
@@ -97,7 +97,7 @@ public class Main1 {
     //private static final String PASSWORD = "Joseluis2024.";
 //    private static final String FILE = "/home/mfernandez/Descargas/Manual Usuario FirmaEC v3.pdf";
 //    private static final String FILE = "/home/mfernandez/Test/Verify/09.pdf";
-    private static final String FILE = "C:\\doc\\INFORME SATISFACCION ENTREGA PROCESO IC-CBP-008-2025-001-signed.pdf";
+    private static final String FILE = "D:\\Firmaelectronica2.pdf";
     private static final String HASH_ALGORITHM = "SHA512";
 
     public static void main(String args[]) throws KeyStoreException, Exception {
@@ -466,7 +466,7 @@ public class Main1 {
         Properties params = new Properties();
         params.setProperty(PDFSignerItext.SIGNING_LOCATION, "");
         params.setProperty(PDFSignerItext.SIGNING_REASON, "");
-        LocalDateTime fechaHora = LocalDateTime.parse("2025-06-17T10:58:12.257412");
+        LocalDateTime fechaHora = LocalDateTime.parse("2025-05-17T10:21:55.154265");
         ZonedDateTime fechaconZona = fechaHora.atZone(ZoneId.of("America/Guayaquil"));
         //LocalDateTime fechaHora = LocalDateTime.of(2025, 4, 23, 16, 20, 56, 0);
         //LocalDateTime fechaHora = LocalDateTime.parse("2025-04-29T9:00:20.12345");
@@ -478,7 +478,7 @@ public class Main1 {
         System.out.println("Fecha y hora asignada: " + fechaFormateada);
         //params.setProperty(PDFSignerItext.SIGN_TIME, TiempoUtils.getFechaHoraServidor(null, PropertiesUtils.versionBase64()));
         params.setProperty(PDFSignerItext.SIGN_TIME, fechaFormateada);
-        params.setProperty(PDFSignerItext.LAST_PAGE, "5");
+        params.setProperty(PDFSignerItext.LAST_PAGE, "1");
         params.setProperty(PDFSignerItext.TYPE_SIG, "QR");
         params.setProperty(PDFSignerItext.INFO_QR, "VALIDAR CON: www.firmadigital.gob.ec");
         params.setProperty(PDFSignerItext.INFO_QR_2, "Firmado digitalmente con FirmaEC 4.0.1 Windows 11 10.0");

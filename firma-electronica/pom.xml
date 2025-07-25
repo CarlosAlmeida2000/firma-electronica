@@ -5,9 +5,9 @@
     <artifactId>libreria</artifactId>
     <version>3.1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
-
+  
     <name>firmadigital-libreria</name>
-    <description>Una librería para firma digital</description>
+    <description>Una librerÃ­a para firma digital</description>
     <url>http://www.firmadigital.gob.ec</url>
     <licenses>
         <license>
@@ -24,15 +24,15 @@
             <organizationUrl>http://www.soportelibre.com</organizationUrl>
         </developer>
         <developer>
-            <name>Misael Fernández Correa</name>
+            <name>Misael FernÃ¡ndez Correa</name>
             <email>misael.fernandez@mintel.gob.ec</email>
-            <organization>Ministerio de Telecomunicaciones y de la Sociedad de la Información</organization>
+            <organization>Ministerio de Telecomunicaciones y de la Sociedad de la InformaciÃ³n</organization>
             <organizationUrl>https://www.telecomunicaciones.gob.ec</organizationUrl>
         </developer>
         <developer>
-            <name>Efraín Rodríguez López</name>
+            <name>EfraÃ­n RodrÃ­guez LÃ³pez</name>
             <email>efrain.rodriguez@sercop.gob.ec</email>
-            <organization>Servicio Nacional de Contratación Pública</organization>
+            <organization>Servicio Nacional de ContrataciÃ³n PÃºblica</organization>
             <organizationUrl>https://portal.compraspublicas.gob.ec/sercop/</organizationUrl>
         </developer>
     </developers>
@@ -185,14 +185,16 @@
     <build>
         <plugins>
             <!--maven check deprecated-->
-            <!--<plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
-            </plugin>-->
+                <source>1.8</source>
+                <target>1.8</target>
+                <showDeprecation>true</showDeprecation>
+            </configuration>
+            </plugin>
             <!--maven check deprecated-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
