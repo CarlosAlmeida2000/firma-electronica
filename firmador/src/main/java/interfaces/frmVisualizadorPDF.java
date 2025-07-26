@@ -4,6 +4,8 @@
  */
 package interfaces;
 
+import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.signatures.DigestAlgorithms;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,12 +20,40 @@ import javax.swing.JPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.PrivateKey;
+import java.security.cert.Certificate;
+import java.util.Properties;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+
+import ec.gob.firmadigital.libreria.keystore.KeyStoreProvider;
+import ec.gob.firmadigital.libreria.keystore.FileKeyStoreProvider;
+import ec.gob.firmadigital.libreria.keystore.KeyStoreProviderFactory;
+import ec.gob.firmadigital.libreria.keystore.KeyStoreUtilities;
+import ec.gob.firmadigital.libreria.keystore.Alias;
+import ec.gob.firmadigital.libreria.sign.pdf.PDFSignerItext;
+import ec.gob.firmadigital.libreria.utils.FileUtils;
+import ec.gob.firmadigital.libreria.utils.PropertiesUtils;
+import ec.gob.firmadigital.libreria.utils.X509CertificateUtils;
+import ec.gob.firmadigital.libreria.validaciones.DocumentoUtils;
+import ec.gob.firmadigital.libreria.exceptions.RubricaException;
+import ec.gob.firmadigital.libreria.exceptions.HoraServidorException;
+import ec.gob.firmadigital.libreria.sign.pdf.RectanguloUtil;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.util.List;
+import javax.swing.JRootPane;
 
 
 /**
@@ -39,6 +69,14 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
     private JLabel lblEstampa;
 
 
+    private static String PKCS12 = "D:\\firma_ciad.p12";
+    private static String PASSWORD = "Carlos2025";
+    private static String FILE = "";
+    private static final String HASH_ALGORITHM = "SHA512";
+
+    public static int xOriginal = 0;
+    private static int yOriginal = 0;
+
     /**
      * Creates new form frmVisualizadorPDF
      */
@@ -48,11 +86,12 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));
     }
 
-    public frmVisualizadorPDF(String ruta) {
+    public frmVisualizadorPDF(String ruta) throws Exception {
         initComponents();
         btnAnterior.addActionListener(e -> mostrarPagina(paginaActual - 1));
         btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));
         System.out.println("RUTA DOCUMENTO: " + ruta);
+        this.FILE = ruta;
         cargarPDF(ruta);
     }
 
@@ -70,6 +109,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         btnEstampar = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        txtFechaHora = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,10 +143,17 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         );
 
         btnEstampar.setText("Estampar");
+        btnEstampar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstamparActionPerformed(evt);
+            }
+        });
 
         btnAnterior.setText("Anterior");
 
         btnSiguiente.setText("Siguiente");
+
+        txtFechaHora.setText("2025-05-17T10:21:55.154265");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,10 +164,14 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAnterior)
-                    .addComponent(btnSiguiente)
-                    .addComponent(btnEstampar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAnterior)
+                            .addComponent(btnSiguiente)
+                            .addComponent(btnEstampar))
+                        .addGap(0, 68, Short.MAX_VALUE))
+                    .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,6 +182,8 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                         .addComponent(btnAnterior)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSiguiente)
+                        .addGap(61, 61, 61)
+                        .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEstampar))
                     .addGroup(layout.createSequentialGroup()
@@ -141,6 +194,13 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEstamparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstamparActionPerformed
+        try{
+            firmarDocumentoPDF(FILE);
+        }catch(Exception ex){
+        }        
+    }//GEN-LAST:event_btnEstamparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,11 +279,13 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
            labelImagen.setBounds(0, 0, nuevoAncho, nuevoAlto);
            labelImagen.addMouseListener(new MouseAdapter() {
                public void mouseClicked(MouseEvent e) {
+
                    int x = e.getX();
                    int y = e.getY();
-                   int xOriginal = (int) (x / escala);
-                   int yOriginal = (int) (y / escala);
-                   System.out.println("Página " + paginaActual + " - clic en X: " + xOriginal + ", Y: " + yOriginal);
+                   frmVisualizadorPDF.xOriginal = (int) (x / escala);
+                   frmVisualizadorPDF.yOriginal = (int) (y / escala);
+                   
+                   System.out.println("Página " + (paginaActual + 1) + " - clic en X: " + xOriginal + ", Y: " + yOriginal);
                }
            });
 
@@ -253,6 +315,117 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Error al renderizar página: " + ex.getMessage());
        }
    }
+
+    private static KeyStore getKeyStore(String archivo, String password, String tipoKeyStoreProvider) throws KeyStoreException {
+        if (archivo != null) { // ARCHIVO
+            KeyStoreProvider ksp = new FileKeyStoreProvider(archivo);
+            return ksp.getKeystore(password.toCharArray());
+        } else { // TOKEN
+            return KeyStoreProviderFactory.getKeyStore(password, tipoKeyStoreProvider);
+        }
+    }
+
+    public static String seleccionarAlias(KeyStore keyStore, JRootPane jRootPane) throws RubricaException {
+        String aliasString = null;
+        // Con que certificado firmar?
+        List<Alias> signingAliases = KeyStoreUtilities.getSigningAliases(keyStore);
+
+        if (signingAliases.isEmpty()) {
+            throw new RubricaException("No se encuentran certificados para firmar\nPuede estar caducado o revocado");
+        }
+
+        if (signingAliases.size() == 1) {
+            aliasString = signingAliases.get(0).getAlias();
+        } else {
+            Alias alias = (Alias) JOptionPane.showInputDialog(jRootPane == null ? null : jRootPane, "Escoja...", "Certificado para firmar",
+                    JOptionPane.QUESTION_MESSAGE, null, signingAliases.toArray(), signingAliases.get(0));
+            if (alias != null) {
+                aliasString = alias.getAlias();
+            }
+        }
+        return aliasString;
+    }
+
+    private Properties parametros() throws IOException, HoraServidorException {
+
+        String llx = Integer.toString(frmVisualizadorPDF.xOriginal);
+        String lly = Integer.toString(frmVisualizadorPDF.yOriginal);
+
+        Properties params = new Properties();
+        params.setProperty(PDFSignerItext.SIGNING_LOCATION, "");
+        params.setProperty(PDFSignerItext.SIGNING_REASON, "");
+        LocalDateTime fechaHora = LocalDateTime.parse("2025-05-17T10:21:55.154265");
+        ZonedDateTime fechaconZona = fechaHora.atZone(ZoneId.of("America/Guayaquil"));
+
+        // Formatear en formato ISO-8601
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+        String fechaFormateada = fechaconZona.format(formatter);
+
+        System.out.println("Fecha y hora asignada: " + fechaFormateada);
+        System.out.println("PAGINA: " + (paginaActual + 1));
+
+        params.setProperty(PDFSignerItext.SIGN_TIME, fechaFormateada);
+        params.setProperty(PDFSignerItext.LAST_PAGE, Integer.toString((paginaActual + 1)));
+        params.setProperty(PDFSignerItext.TYPE_SIG, "QR");
+        params.setProperty(PDFSignerItext.INFO_QR, "VALIDAR CON: www.firmadigital.gob.ec");
+        params.setProperty(PDFSignerItext.INFO_QR_2, "Firmado digitalmente con FirmaEC 4.0.1 Windows 11 10.0");
+        
+        //params.setProperty(PDFSigner.FONT_SIZE, "4.5");
+        // Posicion firma
+        params.setProperty(RectanguloUtil.POSITION_ON_PAGE_LOWER_LEFT_X, llx);
+        params.setProperty(RectanguloUtil.POSITION_ON_PAGE_LOWER_LEFT_Y, lly);
+        
+        return params;
+    }
+
+    private void firmarDocumentoPDF(String file) throws KeyStoreException, Exception {
+        KeyStore keyStore = getKeyStore(PKCS12, PASSWORD, null);
+        ////// LEER PDF:
+        byte[] docByteArry = DocumentoUtils.loadFile(file);
+        byte[] signed = null;
+        String alias = seleccionarAlias(keyStore, null);
+        PrivateKey key = (PrivateKey) keyStore.getKey(alias, PASSWORD.toCharArray());
+
+        X509CertificateUtils x509CertificateUtils = new X509CertificateUtils();
+        System.out.println("x509CertificateUtils: " + x509CertificateUtils);
+        
+        Certificate[] certChain = keyStore.getCertificateChain(alias);
+        Properties properties = parametros();
+        properties.setProperty(PDFSignerItext.PATH, file);
+        PdfReader reader = new PdfReader(file);
+        PDFSignerItext pDFSignerItext = new PDFSignerItext();
+        pDFSignerItext.setProvider(keyStore.getProvider());//QA
+        signed = pDFSignerItext.sign(docByteArry, DigestAlgorithms.SHA512, key, certChain, properties, PropertiesUtils.versionBase64());
+        System.out.println("DOCUMENTO FIRMADO\n-------");
+        ////// Permite guardar el archivo en el equipo y luego lo abre
+        String nombreDocumento = FileUtils.crearNombreFirmado(new File(file), FileUtils.getExtension(signed));
+        FileOutputStream fos = new java.io.FileOutputStream(nombreDocumento);
+        System.out.println("fos: " + fos);
+        //Abrir documento
+        new java.util.Timer().schedule(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    FileUtils.abrirDocumento(nombreDocumento);
+                    System.out.println(nombreDocumento);
+                    // verificarDocumento(nombreDocumento);
+                } catch (java.lang.Exception ex) {
+                    StackTraceElement[] stackTrace = ex.getStackTrace();
+                    if (stackTrace.length > 0) {
+                        StackTraceElement first = stackTrace[0];
+                        System.out.println("Error en clase: " + first.getClassName());
+                        System.out.println("Error en método: " + first.getMethodName());
+                        System.out.println("Error en línea: " + first.getLineNumber());
+                    }
+                    ex.printStackTrace();
+                } finally {
+                    System.exit(0);
+                }
+            }
+        }, 3000); //espera 3 segundos
+        fos.write(signed);
+        fos.close();
+    }
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
@@ -260,5 +433,6 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtFechaHora;
     // End of variables declaration//GEN-END:variables
 }

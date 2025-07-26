@@ -8,6 +8,8 @@ import java.awt.dnd.*;
 import java.awt.datatransfer.*;
 import java.io.File;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 /**
  *
@@ -153,7 +155,12 @@ public class frmFirma extends javax.swing.JFrame {
 
     private void btnFirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirmarActionPerformed
         System.out.println("ABRIENDO DOCUMENTO....");
-        frmVisualizadorPDF formPdf = new frmVisualizadorPDF(txtArchivo.getText());
+        frmVisualizadorPDF formPdf = null;
+        try {
+            formPdf = new frmVisualizadorPDF(txtArchivo.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(frmFirma.class.getName()).log(Level.SEVERE, null, ex);
+        }
         formPdf.setVisible(true);
     }//GEN-LAST:event_btnFirmarActionPerformed
 
