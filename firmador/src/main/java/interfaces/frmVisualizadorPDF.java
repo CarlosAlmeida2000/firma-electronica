@@ -54,34 +54,6 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));
         System.out.println("RUTA DOCUMENTO: " + ruta);
         cargarPDF(ruta);
-        mostrarEstampa();   
-    }
-
-    private void mostrarEstampa(){
-        lblEstampa = new JLabel("Firma aquíiiiiiii");
-        lblEstampa.setOpaque(true);
-        lblEstampa.setBackground(new Color(255, 255, 200, 200)); // semi-transparente
-        lblEstampa.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        lblEstampa.setVisible(false);
-        lblEstampa.setSize(100, 40);  // tamaño de la estampa
-
-        this.getLayeredPane().add(lblEstampa, JLayeredPane.POPUP_LAYER);
-
-        jPanel1.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                Point panelPoint = SwingUtilities.convertPoint(jPanel1, e.getPoint(), frmVisualizadorPDF.this.getLayeredPane());
-                lblEstampa.setLocation(panelPoint.x - lblEstampa.getWidth() / 2, panelPoint.y - lblEstampa.getHeight() / 2);
-                lblEstampa.setVisible(true);
-            }
-        });
-
-        jPanel1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                lblEstampa.setVisible(false);
-            }
-        });
     }
 
     /**
@@ -205,12 +177,20 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         });
     }
 
+    private void crearEstampa() {
+        lblEstampa = new JLabel("Firma aquí");
+        lblEstampa.setOpaque(true);
+        lblEstampa.setBackground(new Color(255, 255, 200, 200)); // semi-transparente
+        lblEstampa.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        lblEstampa.setSize(100, 40);  // tamaño de la estampa
+    }
 
     public void cargarPDF(String rutaArchivo) {
         try {
             documentoPDF = PDDocument.load(new File(rutaArchivo));
             renderizadorPDF = new PDFRenderer(documentoPDF);
             paginaActual = 0;
+            crearEstampa();  
             mostrarPagina(paginaActual);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -235,40 +215,45 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
            g.drawImage(imagen, 0, 0, nuevoAncho, nuevoAlto, null);
            g.dispose();
 
-           JPanel panelVisual = new JPanel() {
-               protected void paintComponent(Graphics g) {
-                   super.paintComponent(g);
-                   g.drawImage(imagenEscalada, 0, 0, null);
-               }
-           };
-           panelVisual.setPreferredSize(new Dimension(nuevoAncho, nuevoAlto));
-
-           panelVisual.addMouseListener(new MouseAdapter() {
+           JLabel labelImagen = new JLabel(new javax.swing.ImageIcon(imagenEscalada));
+           labelImagen.setBounds(0, 0, nuevoAncho, nuevoAlto);
+           labelImagen.addMouseListener(new MouseAdapter() {
                public void mouseClicked(MouseEvent e) {
-                   if (e.getButton() == MouseEvent.BUTTON1) {
-                       int x = e.getX();
-                       int y = e.getY();
-
-                       int xOriginal = (int) (x / escala);
-                       int yOriginal = (int) (y / escala);
-
-                       System.out.println("Página " + paginaActual + " - clic en X: " + xOriginal + ", Y: " + yOriginal);
-                   }
+                   int x = e.getX();
+                   int y = e.getY();
+                   int xOriginal = (int) (x / escala);
+                   int yOriginal = (int) (y / escala);
+                   System.out.println("Página " + paginaActual + " - clic en X: " + xOriginal + ", Y: " + yOriginal);
                }
            });
 
-           jPanel1.removeAll();
-           jPanel1.setLayout(new BorderLayout());
-           jPanel1.add(panelVisual, BorderLayout.CENTER);
-           jPanel1.revalidate();
-           jPanel1.repaint();
+           labelImagen.addMouseMotionListener(new MouseMotionAdapter() {
+               @Override
+               public void mouseMoved(MouseEvent e) {
+                   lblEstampa.setVisible(true);
+                   lblEstampa.setLocation(e.getX() - lblEstampa.getWidth() / 2, e.getY() - lblEstampa.getHeight() / 2);
+               }
+           });
+
+           jLayeredPane1.removeAll();  // Limpiar el panel
+           jLayeredPane1.setLayout(null);  // Usar coordenadas absolutas
+           jLayeredPane1.setPreferredSize(new Dimension(nuevoAncho, nuevoAlto));
+           jLayeredPane1.setSize(new Dimension(nuevoAncho, nuevoAlto));
+           jLayeredPane1.add(labelImagen, JLayeredPane.DEFAULT_LAYER);
+
+           if (lblEstampa != null) {
+               jLayeredPane1.add(lblEstampa, JLayeredPane.POPUP_LAYER);
+           }
+
+           jLayeredPane1.revalidate();
+           jLayeredPane1.repaint();
 
        } catch (IOException ex) {
            ex.printStackTrace();
            JOptionPane.showMessageDialog(this, "Error al renderizar página: " + ex.getMessage());
        }
    }
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnEstampar;
