@@ -46,6 +46,8 @@ import ec.gob.firmadigital.libreria.validaciones.DocumentoUtils;
 import ec.gob.firmadigital.libreria.exceptions.RubricaException;
 import ec.gob.firmadigital.libreria.exceptions.HoraServidorException;
 import ec.gob.firmadigital.libreria.sign.pdf.RectanguloUtil;
+import java.awt.Component;
+import java.awt.geom.Point2D;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -53,7 +55,14 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JRootPane;
+import javax.swing.JScrollPane;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 
 
 /**
@@ -67,10 +76,13 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
     private PDFRenderer renderizadorPDF;
     private int paginaActual = 0;
     private JLabel lblEstampa;
+    private JScrollPane scrollPane;
+    private JLayeredPane panelContenido;
+
 
 
     private static String PKCS12 = "D:\\firma_ciad.p12";
-    private static String PASSWORD = "Carlos2025";
+    private static String PASSWORD = "";
     private static String FILE = "";
     private static final String HASH_ALGORITHM = "SHA512";
 
@@ -82,12 +94,14 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
      */
     public frmVisualizadorPDF() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // 🔸 Mostrar maximizado
         btnAnterior.addActionListener(e -> mostrarPagina(paginaActual - 1));
-        btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));
+        btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));        
     }
 
     public frmVisualizadorPDF(String ruta) throws Exception {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // 🔸 Mostrar maximizado
         btnAnterior.addActionListener(e -> mostrarPagina(paginaActual - 1));
         btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));
         System.out.println("RUTA DOCUMENTO: " + ruta);
@@ -106,20 +120,22 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        btnEstampar = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
         txtFechaHora = new javax.swing.JTextField();
+        btnEstampar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 600));
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 867, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,15 +148,21 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(599, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(200, Short.MAX_VALUE)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
+
+        btnAnterior.setText("Anterior");
+
+        btnSiguiente.setText("Siguiente");
+
+        txtFechaHora.setText("2025-05-17T10:21:55.154265");
 
         btnEstampar.setText("Estampar");
         btnEstampar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,46 +171,39 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
             }
         });
 
-        btnAnterior.setText("Anterior");
-
-        btnSiguiente.setText("Siguiente");
-
-        txtFechaHora.setText("2025-05-17T10:21:55.154265");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAnterior)
-                            .addComponent(btnSiguiente)
-                            .addComponent(btnEstampar))
-                        .addGap(0, 68, Short.MAX_VALUE))
-                    .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(btnEstampar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnAnterior)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSiguiente)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(btnAnterior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSiguiente)
-                        .addGap(61, 61, 61)
-                        .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEstampar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAnterior)
+                    .addComponent(btnSiguiente)
+                    .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEstampar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -242,79 +257,165 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         lblEstampa.setOpaque(true);
         lblEstampa.setBackground(new Color(255, 255, 200, 200)); // semi-transparente
         lblEstampa.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        lblEstampa.setSize(100, 40);  // tamaño de la estampa
+        lblEstampa.setSize(140, 50);  // tamaño de la estampa
     }
+
 
     public void cargarPDF(String rutaArchivo) {
         try {
             documentoPDF = PDDocument.load(new File(rutaArchivo));
             renderizadorPDF = new PDFRenderer(documentoPDF);
             paginaActual = 0;
-            crearEstampa();  
+
+            crearEstampa();
+
+            // Panel de contenido con layout nulo para coordenadas absolutas
+            panelContenido = new JLayeredPane();
+            panelContenido.setLayout(null);
+
+            scrollPane = new JScrollPane(panelContenido);
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+            jPanel1.removeAll();
+            jPanel1.setLayout(new BorderLayout());
+            jPanel1.add(scrollPane, BorderLayout.CENTER);
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
             mostrarPagina(paginaActual);
+
         } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al cargar PDF: " + ex.getMessage());
         }
     }
 
+    public Point2D.Float obtenerCoordenadasEstampaEnPDF() {
+        if (lblEstampa == null || documentoPDF == null || renderizadorPDF == null) {
+            return null;
+        }
+
+        try {
+            // Obtener la página actual del PDF
+            PDPage pagina = documentoPDF.getPage(paginaActual);
+            PDRectangle mediaBox = pagina.getMediaBox();
+
+            // Renderizar imagen original para obtener dimensiones del PDF real
+            BufferedImage imagenPDF = renderizadorPDF.renderImageWithDPI(paginaActual, 150);
+            int anchoImagen = imagenPDF.getWidth();
+            int altoImagen = imagenPDF.getHeight();
+
+            // Buscar el JLabel de la imagen dentro del panelContenido
+            JLabel labelImagen = null;
+            for (Component comp : panelContenido.getComponents()) {
+                if (comp instanceof JLabel && ((JLabel) comp).getIcon() != null) {
+                    labelImagen = (JLabel) comp;
+                    break;
+                }
+            }
+
+            if (labelImagen == null) {
+                System.out.println("No se encontró el JLabel de la imagen.");
+                return null;
+            }
+
+            // Posición del lblEstampa relativa a la imagen renderizada
+            Point posEstampa = lblEstampa.getLocation();
+            Point posImagen = labelImagen.getLocation();
+
+            int xRel = posEstampa.x - posImagen.x + lblEstampa.getWidth() / 2; // centro de la estampa
+            int yRel = posEstampa.y - posImagen.y + lblEstampa.getHeight() / 2;
+
+            // Convertir coordenadas de imagen renderizada a coordenadas PDF
+            float escalaX = mediaBox.getWidth() / (float) anchoImagen;
+            float escalaY = mediaBox.getHeight() / (float) altoImagen;
+
+            float xPDF = xRel * escalaX;
+            float yPDF = mediaBox.getHeight() - (yRel * escalaY); // invertir Y
+
+            // Ajustes manuales (en puntos del PDF)
+            float ajusteX = 33.0f; // mueve 10 puntos PDF a la izquierda
+            float ajusteY = -13.0f; // mueve 5 puntos PDF hacia arriba
+
+            xPDF -= ajusteX;
+            yPDF -= ajusteY;
+
+            return new Point2D.Float(xPDF, yPDF);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+
     public void mostrarPagina(int indice) {
-       try {
-           if (indice < 0 || indice >= documentoPDF.getNumberOfPages()) return;
+        try {
+            if (indice < 0 || indice >= documentoPDF.getNumberOfPages()) return;
 
-           paginaActual = indice;
-           BufferedImage imagen = renderizadorPDF.renderImageWithDPI(paginaActual, 150);
-           int panelAncho = jPanel1.getWidth();
+            paginaActual = indice;
 
-           double escala = (double) panelAncho / imagen.getWidth();
-           int nuevoAncho = panelAncho;
-           int nuevoAlto = (int) (imagen.getHeight() * escala);
+            // Renderiza imagen del PDF
+            BufferedImage imagen = renderizadorPDF.renderImageWithDPI(paginaActual, 150);
+            int ancho = imagen.getWidth();
+            int alto = imagen.getHeight();
 
-           BufferedImage imagenEscalada = new BufferedImage(nuevoAncho, nuevoAlto, BufferedImage.TYPE_INT_RGB);
-           Graphics g = imagenEscalada.getGraphics();
-           g.drawImage(imagen, 0, 0, nuevoAncho, nuevoAlto, null);
-           g.dispose();
+            // Crear etiqueta de la imagen
+            JLabel labelImagen = new JLabel(new ImageIcon(imagen));
+            labelImagen.setBounds(0, 0, ancho, alto);
 
-           JLabel labelImagen = new JLabel(new javax.swing.ImageIcon(imagenEscalada));
-           labelImagen.setBounds(0, 0, nuevoAncho, nuevoAlto);
-           labelImagen.addMouseListener(new MouseAdapter() {
-               public void mouseClicked(MouseEvent e) {
+            // Eventos de clic y movimiento del mouse
+            labelImagen.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    int x = e.getX();
+                    int y = e.getY();
+                    
+                    Point2D.Float coords = obtenerCoordenadasEstampaEnPDF();
 
-                   int x = e.getX();
-                   int y = e.getY();
-                   frmVisualizadorPDF.xOriginal = (int) (x / escala);
-                   frmVisualizadorPDF.yOriginal = (int) (y / escala);
-                   
-                   System.out.println("Página " + (paginaActual + 1) + " - clic en X: " + xOriginal + ", Y: " + yOriginal);
-               }
-           });
+                    frmVisualizadorPDF.xOriginal = (int) coords.x;
+                    frmVisualizadorPDF.yOriginal = (int) coords.y;
+                }
+            });
 
-           labelImagen.addMouseMotionListener(new MouseMotionAdapter() {
-               @Override
-               public void mouseMoved(MouseEvent e) {
-                   lblEstampa.setVisible(true);
-                   lblEstampa.setLocation(e.getX() - lblEstampa.getWidth() / 2, e.getY() - lblEstampa.getHeight() / 2);
-               }
-           });
+            labelImagen.addMouseMotionListener(new MouseMotionAdapter() {
+                @Override
+                public void mouseMoved(MouseEvent e) {
+                    lblEstampa.setVisible(true);
+                    lblEstampa.setLocation(
+                        e.getX() - lblEstampa.getWidth() / 2,
+                        e.getY() - lblEstampa.getHeight() / 2
+                    );
+                }
+            });
 
-           jLayeredPane1.removeAll();  // Limpiar el panel
-           jLayeredPane1.setLayout(null);  // Usar coordenadas absolutas
-           jLayeredPane1.setPreferredSize(new Dimension(nuevoAncho, nuevoAlto));
-           jLayeredPane1.setSize(new Dimension(nuevoAncho, nuevoAlto));
-           jLayeredPane1.add(labelImagen, JLayeredPane.DEFAULT_LAYER);
+            // Asegurar que panelContenido es un JLayeredPane
+            if (!(panelContenido instanceof JLayeredPane)) {
+                panelContenido = new JLayeredPane();
+            }
 
-           if (lblEstampa != null) {
-               jLayeredPane1.add(lblEstampa, JLayeredPane.POPUP_LAYER);
-           }
+            panelContenido.removeAll();
+            panelContenido.setLayout(null);
+            panelContenido.setPreferredSize(new Dimension(ancho, alto));
+            panelContenido.setSize(ancho, alto);
 
-           jLayeredPane1.revalidate();
-           jLayeredPane1.repaint();
+            // Asegurar tamaño y visibilidad de lblEstampa
+            lblEstampa.setBounds(0, 0, lblEstampa.getWidth(), lblEstampa.getHeight());
+            lblEstampa.setVisible(true);
 
-       } catch (IOException ex) {
-           ex.printStackTrace();
-           JOptionPane.showMessageDialog(this, "Error al renderizar página: " + ex.getMessage());
-       }
-   }
+            // Añadir imagen en fondo y estampa en capa superior
+            panelContenido.add(labelImagen, JLayeredPane.DEFAULT_LAYER);
+            panelContenido.add(lblEstampa, JLayeredPane.PALETTE_LAYER);
+
+            panelContenido.revalidate();
+            panelContenido.repaint();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al renderizar página: " + ex.getMessage());
+        }
+    }
+
 
     private static KeyStore getKeyStore(String archivo, String password, String tipoKeyStoreProvider) throws KeyStoreException {
         if (archivo != null) { // ARCHIVO
@@ -410,13 +511,6 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                     System.out.println(nombreDocumento);
                     // verificarDocumento(nombreDocumento);
                 } catch (java.lang.Exception ex) {
-                    StackTraceElement[] stackTrace = ex.getStackTrace();
-                    if (stackTrace.length > 0) {
-                        StackTraceElement first = stackTrace[0];
-                        System.out.println("Error en clase: " + first.getClassName());
-                        System.out.println("Error en método: " + first.getMethodName());
-                        System.out.println("Error en línea: " + first.getLineNumber());
-                    }
                     ex.printStackTrace();
                 } finally {
                     System.exit(0);
