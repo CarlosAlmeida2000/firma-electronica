@@ -150,6 +150,7 @@ ec\gob\firmadigital\libreria\certificate\ec\securitydata\CertificadoRepresentant
 ec\gob\firmadigital\libreria\sign\pdf\BasePdfHashSigner.class
 ec\gob\firmadigital\libreria\certificate\ec\anfac\CertificadoAnfAc18332Factory.class
 ec\gob\firmadigital\libreria\xml\Utils.class
+interfaces\frmVisualizadorPDF$6.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\CertificadoPersonaNaturalLazzate.class
 ec\gob\firmadigital\libreria\certificate\ec\digercic\DigercicCaCert.class
 ec\gob\firmadigital\libreria\sign\pdf\PDFSignerItext$1.class
@@ -216,6 +217,7 @@ ec\gob\firmadigital\libreria\sign\DigestAlgorithm.class
 ec\gob\firmadigital\libreria\sign\pdf\PDFSignerItext.class
 ec\gob\firmadigital\libreria\certificate\ec\digercic\CertificadoDigercicFactory.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\LazzateCa2Cert.class
+interfaces\frmVisualizadorPDF$7.class
 ec\gob\firmadigital\libreria\sign\EncryptionAlgorithm.class
 ec\gob\firmadigital\libreria\certificate\ec\cj\CertificadoConsejoJudicaturaDataFactory.class
 ec\gob\firmadigital\libreria\certificate\ec\argosdata\ArgosDataSubCaCert.class
