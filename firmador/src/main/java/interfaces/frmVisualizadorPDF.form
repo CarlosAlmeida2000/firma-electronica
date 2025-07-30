@@ -220,6 +220,9 @@
           </Border>
         </Property>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="P&#xe1;gina del documento"/>
+      </AccessibilityProperties>
 
       <Layout>
         <DimensionLayout dim="0">

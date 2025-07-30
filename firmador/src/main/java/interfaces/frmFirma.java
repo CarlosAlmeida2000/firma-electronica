@@ -23,8 +23,7 @@ public class frmFirma extends javax.swing.JFrame {
     public frmFirma() {
         initComponents();
 
-        // Soporte para arrastrar archivos al panel
-        new DropTarget(jpArchivo, new DropTargetListener() {
+        new DropTarget(txtCertificadoFirma, new DropTargetListener() {
             @Override
             public void dragEnter(DropTargetDragEvent dtde) {}
 
@@ -46,16 +45,15 @@ public class frmFirma extends javax.swing.JFrame {
 
                     if (!droppedFiles.isEmpty()) {
                         File file = droppedFiles.get(0);
-                        String rutaAbsoluta = file.getAbsolutePath();
-                        txtArchivo.setText(rutaAbsoluta);
+                        txtCertificadoFirma.setText(file.getAbsolutePath()); // Muestra en el textField
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         });
-
-        new DropTarget(txtArchivo, new DropTargetListener() {
+        
+        new DropTarget(txtArchivoFirmar, new DropTargetListener() {
             @Override
             public void dragEnter(DropTargetDragEvent dtde) {}
 
@@ -77,7 +75,7 @@ public class frmFirma extends javax.swing.JFrame {
 
                     if (!droppedFiles.isEmpty()) {
                         File file = droppedFiles.get(0);
-                        txtArchivo.setText(file.getAbsolutePath()); // Muestra en el textField
+                        txtArchivoFirmar.setText(file.getAbsolutePath()); // Muestra en el textField
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -95,26 +93,28 @@ public class frmFirma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtArchivo = new javax.swing.JTextField();
-        jpArchivo = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         btnFirmar = new javax.swing.JButton();
+        txtArchivoFirmar = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtClaveFirma = new javax.swing.JTextField();
+        txtCertificadoFirma = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txtArchivo.setText("Arrastre el documento aqui");
-
-        jpArchivo.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jpArchivoLayout = new javax.swing.GroupLayout(jpArchivo);
-        jpArchivo.setLayout(jpArchivoLayout);
-        jpArchivoLayout.setHorizontalGroup(
-            jpArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jpArchivoLayout.setVerticalGroup(
-            jpArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 121, Short.MAX_VALUE)
-        );
 
         btnFirmar.setText("Firmar");
         btnFirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,32 +123,88 @@ public class frmFirma extends javax.swing.JFrame {
             }
         });
 
+        txtArchivoFirmar.setEditable(false);
+
+        jPanel2.setToolTipText("Datos firmante");
+
+        jLabel1.setText("Certificado firma");
+
+        txtClaveFirma.setToolTipText("Arrastre el documento a firmar");
+
+        txtCertificadoFirma.setEditable(false);
+
+        jLabel3.setText("Clave firma");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCertificadoFirma)
+                    .addComponent(txtClaveFirma)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addGap(0, 417, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCertificadoFirma, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtClaveFirma, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        txtClaveFirma.getAccessibleContext().setAccessibleName("");
+        txtClaveFirma.getAccessibleContext().setAccessibleDescription("");
+
+        jLabel2.setText("Documento a firmar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jpArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE))
-                .addContainerGap(79, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFirmar)
-                .addGap(108, 108, 108))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(457, 457, 457)
+                        .addComponent(btnFirmar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(txtArchivoFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
-                .addComponent(txtArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(jpArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtArchivoFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFirmar)
-                .addGap(59, 59, 59))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        jPanel2.getAccessibleContext().setAccessibleName("Datos firmante");
+        jPanel2.getAccessibleContext().setAccessibleDescription("Datos firmante");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -157,7 +213,7 @@ public class frmFirma extends javax.swing.JFrame {
         System.out.println("ABRIENDO DOCUMENTO....");
         frmVisualizadorPDF formPdf = null;
         try {
-            formPdf = new frmVisualizadorPDF(txtArchivo.getText());
+            formPdf = new frmVisualizadorPDF(txtArchivoFirmar.getText(), txtCertificadoFirma.getText(), txtClaveFirma.getText());
         } catch (Exception ex) {
             Logger.getLogger(frmFirma.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -201,7 +257,13 @@ public class frmFirma extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirmar;
-    private javax.swing.JPanel jpArchivo;
-    private javax.swing.JTextField txtArchivo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtArchivoFirmar;
+    private javax.swing.JTextField txtCertificadoFirma;
+    private javax.swing.JTextField txtClaveFirma;
     // End of variables declaration//GEN-END:variables
 }

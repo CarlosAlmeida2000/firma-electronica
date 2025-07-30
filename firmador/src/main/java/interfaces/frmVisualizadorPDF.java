@@ -83,8 +83,8 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
 
 
 
-    private static String PKCS12 = "D:\\firma_ciad.p12";
-    private static String PASSWORD = "Carlos2025";
+    private static String PKCS12 = "";
+    private static String PASSWORD = "";
     private static String FILE = "";
     private static final String HASH_ALGORITHM = "SHA512";
 
@@ -101,14 +101,16 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));        
     }
 
-    public frmVisualizadorPDF(String ruta) throws Exception {
+    public frmVisualizadorPDF(String documentoFirmar, String certificadoFirma, String claveFirma) throws Exception {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH); // 🔸 Mostrar maximizado
         btnAnterior.addActionListener(e -> mostrarPagina(paginaActual - 1));
         btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));
-        System.out.println("RUTA DOCUMENTO: " + ruta);
-        this.FILE = ruta;
-        cargarPDF(ruta);
+        System.out.println("RUTA DOCUMENTO: " + documentoFirmar);
+        this.FILE = documentoFirmar;
+        this.PKCS12 = certificadoFirma;
+        this.PASSWORD = claveFirma;
+        cargarPDF();
     }
 
     /**
@@ -304,12 +306,14 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
+        jPanel2.getAccessibleContext().setAccessibleName("Página del documento");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEstamparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstamparActionPerformed
         try{
-            firmarDocumentoPDF(FILE);
+            firmarDocumentoPDF();
         }catch(Exception ex){
         }        
     }//GEN-LAST:event_btnEstamparActionPerformed
@@ -358,7 +362,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
     }
 
     private void crearEstampa() {
-        lblEstampa = new JLabel("Firma aquí");
+        lblEstampa = new JLabel("ESTAMPA !!!");
         lblEstampa.setOpaque(true);
         lblEstampa.setBackground(new Color(255, 255, 200, 200)); // semi-transparente
         lblEstampa.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -366,9 +370,9 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
     }
 
 
-    public void cargarPDF(String rutaArchivo) {
+    public void cargarPDF() {
         try {
-            documentoPDF = PDDocument.load(new File(rutaArchivo));
+            documentoPDF = PDDocument.load(new File(this.FILE));
             renderizadorPDF = new PDFRenderer(documentoPDF);
             paginaActual = 0;
 
@@ -584,10 +588,10 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         return params;
     }
 
-    private void firmarDocumentoPDF(String file) throws KeyStoreException, Exception {
+    private void firmarDocumentoPDF() throws KeyStoreException, Exception {
         KeyStore keyStore = getKeyStore(PKCS12, PASSWORD, null);
         ////// LEER PDF:
-        byte[] docByteArry = DocumentoUtils.loadFile(file);
+        byte[] docByteArry = DocumentoUtils.loadFile(this.FILE);
         byte[] signed = null;
         String alias = seleccionarAlias(keyStore, null);
         PrivateKey key = (PrivateKey) keyStore.getKey(alias, PASSWORD.toCharArray());
@@ -597,14 +601,14 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         
         Certificate[] certChain = keyStore.getCertificateChain(alias);
         Properties properties = parametros();
-        properties.setProperty(PDFSignerItext.PATH, file);
-        PdfReader reader = new PdfReader(file);
+        properties.setProperty(PDFSignerItext.PATH, this.FILE);
+        PdfReader reader = new PdfReader(this.FILE);
         PDFSignerItext pDFSignerItext = new PDFSignerItext();
         pDFSignerItext.setProvider(keyStore.getProvider());//QA
         signed = pDFSignerItext.sign(docByteArry, DigestAlgorithms.SHA512, key, certChain, properties, PropertiesUtils.versionBase64());
         System.out.println("DOCUMENTO FIRMADO\n-------");
         ////// Permite guardar el archivo en el equipo y luego lo abre
-        String nombreDocumento = FileUtils.crearNombreFirmado(new File(file), FileUtils.getExtension(signed));
+        String nombreDocumento = FileUtils.crearNombreFirmado(new File(this.FILE), FileUtils.getExtension(signed));
         FileOutputStream fos = new java.io.FileOutputStream(nombreDocumento);
         System.out.println("fos: " + fos);
         //Abrir documento
