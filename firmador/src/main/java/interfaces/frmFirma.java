@@ -24,7 +24,7 @@ public class frmFirma extends javax.swing.JFrame {
     public frmFirma() {
         initComponents();
 
-        getContentPane().setBackground(Color.WHITE);
+        getContentPane().setBackground(Color.getColor("#FBF6F2"));
         setLocationRelativeTo(null); // Centra la ventana
         setResizable(false);         // Evita cambio de tamaño
 
@@ -121,17 +121,17 @@ public class frmFirma extends javax.swing.JFrame {
         );
 
         setTitle("Firmador");
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(251, 246, 242));
 
-        jPanel2.setBackground(new java.awt.Color(10, 171, 171));
+        jPanel2.setBackground(new java.awt.Color(251, 246, 242));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel2.setToolTipText("Datos firmante");
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Certificado firma");
 
-        txtClaveFirma.setBackground(new java.awt.Color(255, 255, 255));
-        txtClaveFirma.setForeground(new java.awt.Color(0, 0, 0));
+        txtClaveFirma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtClaveFirma.setToolTipText("Ingrese la clave de la firma");
         txtClaveFirma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,19 +141,21 @@ public class frmFirma extends javax.swing.JFrame {
 
         txtCertificadoFirma.setEditable(false);
         txtCertificadoFirma.setBackground(new java.awt.Color(255, 255, 255));
-        txtCertificadoFirma.setForeground(new java.awt.Color(0, 0, 0));
+        txtCertificadoFirma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCertificadoFirma.setToolTipText("Arrastre el certificado de la firma");
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setText("Clave firma");
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Documento a firmar");
 
         txtArchivoFirmar.setEditable(false);
         txtArchivoFirmar.setBackground(new java.awt.Color(255, 255, 255));
-        txtArchivoFirmar.setForeground(new java.awt.Color(0, 0, 0));
+        txtArchivoFirmar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtArchivoFirmar.setToolTipText("Arrastre el documento a firmar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -192,7 +194,7 @@ public class frmFirma extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtArchivoFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtArchivoFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -200,6 +202,7 @@ public class frmFirma extends javax.swing.JFrame {
         txtClaveFirma.getAccessibleContext().setAccessibleDescription("");
 
         btnFirmar.setBackground(new java.awt.Color(0, 102, 102));
+        btnFirmar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         btnFirmar.setForeground(new java.awt.Color(255, 255, 255));
         btnFirmar.setText("Firmar");
         btnFirmar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -239,7 +242,7 @@ public class frmFirma extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnFirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel2.getAccessibleContext().setAccessibleName("Datos firmante");

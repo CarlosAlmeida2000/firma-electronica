@@ -97,7 +97,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
     public frmVisualizadorPDF() {
         initComponents();
 
-        getContentPane().setBackground(Color.WHITE);
+        getContentPane().setBackground(Color.getColor("#FBF6F2"));
         setLocationRelativeTo(null); // Centra la ventana
         setResizable(false);         // Evita cambio de tamaño
 
@@ -108,6 +108,11 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
 
     public frmVisualizadorPDF(String documentoFirmar, String certificadoFirma, String claveFirma) throws Exception {
         initComponents();
+        
+        getContentPane().setBackground(Color.getColor("#FBF6F2"));
+        setLocationRelativeTo(null); // Centra la ventana
+        setResizable(false);         // Evita cambio de tamaño
+        
         setExtendedState(JFrame.MAXIMIZED_BOTH); // 🔸 Mostrar maximizado
         btnAnterior.addActionListener(e -> mostrarPagina(paginaActual - 1));
         btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));
@@ -173,12 +178,13 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(164, Short.MAX_VALUE)
+                .addContainerGap(157, Short.MAX_VALUE)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
 
         btnEstampar.setBackground(new java.awt.Color(0, 102, 102));
+        btnEstampar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         btnEstampar.setForeground(new java.awt.Color(255, 255, 255));
         btnEstampar.setText("Estampar");
         btnEstampar.setBorder(javax.swing.BorderFactory.createCompoundBorder());
@@ -189,26 +195,26 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
             }
         });
 
-        pnlDatosFirma.setBackground(new java.awt.Color(10, 171, 171));
+        pnlDatosFirma.setBackground(new java.awt.Color(251, 246, 242));
         pnlDatosFirma.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setText("Fecha firma");
 
-        txtRazon.setBackground(new java.awt.Color(255, 255, 255));
-        txtRazon.setForeground(new java.awt.Color(0, 0, 0));
+        txtRazon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Razón firma");
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Localización");
 
-        txtLocalizacion.setBackground(new java.awt.Color(255, 255, 255));
-        txtLocalizacion.setForeground(new java.awt.Color(0, 0, 0));
+        txtLocalizacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtFechaFirma.setBackground(new java.awt.Color(255, 255, 255));
-        txtFechaFirma.setForeground(new java.awt.Color(0, 0, 0));
+        txtFechaFirma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtFechaFirma.setText("2025-05-17T10:21:55.154265854");
 
         javax.swing.GroupLayout pnlDatosFirmaLayout = new javax.swing.GroupLayout(pnlDatosFirma);
@@ -239,16 +245,19 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosFirmaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRazon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaFirma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRazon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaFirma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtLocalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtLocalizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(251, 246, 242));
+
         btnSiguiente.setBackground(new java.awt.Color(0, 102, 102));
+        btnSiguiente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
         btnSiguiente.setText(">");
         btnSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -260,6 +269,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         });
 
         btnAnterior.setBackground(new java.awt.Color(0, 102, 102));
+        btnAnterior.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
         btnAnterior.setText("<");
         btnAnterior.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -270,7 +280,8 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
             }
         });
 
-        lblNumeroPagina.setForeground(new java.awt.Color(255, 255, 255));
+        lblNumeroPagina.setForeground(new java.awt.Color(0, 102, 102));
+        lblNumeroPagina.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNumeroPagina.setText("1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -280,9 +291,9 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblNumeroPagina)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNumeroPagina, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4))
         );
@@ -293,7 +304,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumeroPagina))
+                    .addComponent(lblNumeroPagina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -318,7 +329,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEstampar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
