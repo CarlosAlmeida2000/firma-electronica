@@ -258,5 +258,5 @@ G:\Mi unidad\Firma\app\firma-electronica\firmador\src\main\java\ec\gob\firmadigi
 G:\Mi unidad\Firma\app\firma-electronica\firmador\src\main\java\ec\gob\firmadigital\libreria\validaciones\FiltrarArchivosPdf.java
 G:\Mi unidad\Firma\app\firma-electronica\firmador\src\main\java\ec\gob\firmadigital\libreria\xml\FileUtils.java
 G:\Mi unidad\Firma\app\firma-electronica\firmador\src\main\java\ec\gob\firmadigital\libreria\xml\Utils.java
-G:\Mi unidad\Firma\app\firma-electronica\firmador\src\main\java\interfaces\frmFirma.java
-G:\Mi unidad\Firma\app\firma-electronica\firmador\src\main\java\interfaces\frmVisualizadorPDF.java
+G:\Mi unidad\Firma\app\firma-electronica\firmador\src\main\java\interfaces\frmDatosFirmante.java
+G:\Mi unidad\Firma\app\firma-electronica\firmador\src\main\java\interfaces\frmVisualizadorDocumento.java

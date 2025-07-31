@@ -71,7 +71,7 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
  *
  * @author Carlos
  */
-public class frmVisualizadorPDF extends javax.swing.JFrame {
+public class frmVisualizadorDocumento extends javax.swing.JFrame {
 
     private BufferedImage imagenPDF;
     private PDDocument documentoPDF;
@@ -94,7 +94,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
     /**
      * Creates new form frmVisualizadorPDF
      */
-    public frmVisualizadorPDF() {
+    public frmVisualizadorDocumento() {
         initComponents();
 
         getContentPane().setBackground(Color.getColor("#FBF6F2"));
@@ -106,7 +106,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         btnSiguiente.addActionListener(e -> mostrarPagina(paginaActual + 1));        
     }
 
-    public frmVisualizadorPDF(String documentoFirmar, String certificadoFirma, String claveFirma) throws Exception {
+    public frmVisualizadorDocumento(String documentoFirmar, String certificadoFirma, String claveFirma) throws Exception {
         initComponents();
         
         getContentPane().setBackground(Color.getColor("#FBF6F2"));
@@ -150,7 +150,6 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         setTitle("Firmador");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(500, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Documento a firmar"));
@@ -178,7 +177,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(157, Short.MAX_VALUE)
+                .addContainerGap(155, Short.MAX_VALUE)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
         );
@@ -255,6 +254,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(251, 246, 242));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         btnSiguiente.setBackground(new java.awt.Color(0, 102, 102));
         btnSiguiente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -292,7 +292,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNumeroPagina, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(lblNumeroPagina, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4))
@@ -329,7 +329,7 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEstampar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
@@ -370,20 +370,21 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVisualizadorPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVisualizadorDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVisualizadorPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVisualizadorDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVisualizadorPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVisualizadorDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVisualizadorPDF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVisualizadorDocumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVisualizadorPDF().setVisible(true);
+                new frmVisualizadorDocumento().setVisible(true);
             }
         });
     }
@@ -509,8 +510,8 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
                     
                     Point2D.Float coords = obtenerCoordenadasEstampaEnPDF();
 
-                    frmVisualizadorPDF.xOriginal = (int) coords.x;
-                    frmVisualizadorPDF.yOriginal = (int) coords.y;
+                    frmVisualizadorDocumento.xOriginal = (int) coords.x;
+                    frmVisualizadorDocumento.yOriginal = (int) coords.y;
                 }
             });
 
@@ -585,8 +586,8 @@ public class frmVisualizadorPDF extends javax.swing.JFrame {
 
     private Properties parametros() throws IOException, HoraServidorException {
 
-        String llx = Integer.toString(frmVisualizadorPDF.xOriginal);
-        String lly = Integer.toString(frmVisualizadorPDF.yOriginal);
+        String llx = Integer.toString(frmVisualizadorDocumento.xOriginal);
+        String lly = Integer.toString(frmVisualizadorDocumento.yOriginal);
 
         Properties params = new Properties();
         params.setProperty(PDFSignerItext.SIGNING_LOCATION, "");

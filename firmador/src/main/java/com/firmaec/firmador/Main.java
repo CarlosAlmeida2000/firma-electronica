@@ -4,7 +4,7 @@
  */
 package com.firmaec.firmador;
 
-import interfaces.frmFirma;
+import interfaces.frmDatosFirmante;
 
 /**
  *
@@ -14,6 +14,6 @@ public class Main {
  
     public static void main(String[] args) {
         System.out.println("INICIANDO....");
-        new frmFirma().setVisible(true);
+        new frmDatosFirmante().setVisible(true);
     }   
 }

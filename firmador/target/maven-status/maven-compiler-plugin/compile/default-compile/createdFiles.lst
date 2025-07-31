@@ -1,6 +1,5 @@
 ec\gob\firmadigital\libreria\certificate\ec\anfac\CertificadoPersonaJuridicaAnfAc18332.class
 ec\gob\firmadigital\libreria\certificate\ec\corpnewbest\CertificadoPersonaJuridicaCorpNewBest.class
-interfaces\frmFirma$2.class
 ec\gob\firmadigital\libreria\certificate\ec\datil\DatilSubCaCert20212031.class
 ec\gob\firmadigital\libreria\sign\pdf\PadesEnhancedSigner.class
 ec\gob\firmadigital\libreria\sign\xades\XAdESSigner.class
@@ -12,6 +11,7 @@ ec\gob\firmadigital\libreria\utils\HttpClient$2.class
 ec\gob\firmadigital\libreria\certificate\ec\anfac\CertificadoFuncionarioPublicoAnfAc18332.class
 ec\gob\firmadigital\libreria\keystore\WindowsKeyStoreProvider.class
 ec\gob\firmadigital\libreria\certificate\ec\anfac\AnfAc18332SubCaCert20162032.class
+interfaces\frmVisualizadorDocumento$4.class
 ec\gob\firmadigital\libreria\certificate\ec\datil\CertificadoDatilDataFactory.class
 ec\gob\firmadigital\libreria\certificate\ec\corpnewbest\CertificadoPersonaNaturalCorpNewBest.class
 ec\gob\firmadigital\libreria\sign\xades\XmlStyle.class
@@ -22,7 +22,6 @@ ec\gob\firmadigital\libreria\xml\FileUtils.class
 ec\gob\firmadigital\libreria\certificate\ec\securitydata\CertificadoPersonaJuridicaSecurityData.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\LazzateCaWeGoCert.class
 ec\gob\firmadigital\libreria\certificate\ec\corpnewbest\CertificadoCorpNewBest.class
-interfaces\frmVisualizadorPDF$3.class
 ec\gob\firmadigital\libreria\certificate\base\RubricaCertificate.class
 ec\gob\firmadigital\libreria\certificate\ec\datil\CertificadoPersonaNaturalDatil.class
 ec\gob\firmadigital\libreria\crl\ServicioCRL.class
@@ -36,9 +35,9 @@ ec\gob\firmadigital\libreria\certificate\ec\uanataca\CertificadoUanataca.class
 ec\gob\firmadigital\libreria\certificate\ec\uanataca\CertificadoSelladoTiempoUanataca.class
 ec\gob\firmadigital\libreria\certificate\ec\bce\BceCaCert.class
 ec\gob\firmadigital\libreria\pdf\SignatureParameters.class
+interfaces\frmDatosFirmante$3.class
 ec\gob\firmadigital\libreria\certificate\ec\securitydata\CertificadoSecurityData.class
 ec\gob\firmadigital\libreria\certificate\ec\anfac\CertificadoAnfAc18332.class
-interfaces\frmVisualizadorPDF$2.class
 ec\gob\firmadigital\libreria\certificate\ec\CertificadoMiembroEmpresa.class
 ec\gob\firmadigital\libreria\sign\xades\UnsupportedSignFormatException.class
 ec\gob\firmadigital\libreria\model\RubricaRuntimeException.class
@@ -46,7 +45,6 @@ ec\gob\firmadigital\libreria\certificate\ec\argosdata\ArgosDataCaCert.class
 ec\gob\firmadigital\libreria\model\CommonDocument.class
 ec\gob\firmadigital\libreria\certificate\ec\firmasegura\CertificadoFirmaSegura.class
 ec\gob\firmadigital\libreria\exceptions\CRLValidationException.class
-interfaces\frmFirma$3.class
 ec\gob\firmadigital\libreria\certificate\ec\securitydata\SecurityDataSubCaCert20192031.class
 ec\gob\firmadigital\libreria\keystore\SafenetLinuxKeyStoreProvider.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\CertificadoLazzateDataFactory.class
@@ -64,6 +62,7 @@ ec\gob\firmadigital\libreria\ocsp\ValidadorOCSP.class
 ec\gob\firmadigital\libreria\sign\pdf\PadesBasicSigner.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\LazzateSubCaCert.class
 ec\gob\firmadigital\libreria\pades\SignatureParameters.class
+interfaces\frmDatosFirmante$2.class
 ec\gob\firmadigital\libreria\certificate\ec\bce\CertificadoFuncionarioPublicoBancoCentral.class
 ec\gob\firmadigital\libreria\certificate\ec\corpnewbest\CertificadoCorpNewBestDataFactory.class
 ec\gob\firmadigital\libreria\sign\pdf\PDFUtils.class
@@ -81,9 +80,11 @@ ec\gob\firmadigital\libreria\utils\PropertiesUtils.class
 ec\gob\firmadigital\libreria\utils\QRCode.class
 ec\gob\firmadigital\libreria\sign\xades\ReferenceIsNotXmlException.class
 ec\gob\firmadigital\libreria\certificate\ec\cj\CertificadoConsejoJudicatura.class
+interfaces\frmDatosFirmante$4.class
 ec\gob\firmadigital\libreria\certificate\ec\argosdata\CertificadoRepresentanteLegalArgosData.class
 ec\gob\firmadigital\libreria\certificate\ec\argosdata\CertificadoArgosData.class
 ec\gob\firmadigital\libreria\exceptions\ConexionInvalidaOCSPException.class
+interfaces\frmVisualizadorDocumento$3.class
 ec\gob\firmadigital\libreria\sign\SignInfo.class
 ec\gob\firmadigital\libreria\exceptions\FormatFileException.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\LazzateCa1Cert.class
@@ -95,6 +96,7 @@ ec\gob\firmadigital\libreria\certificate\ec\eclipsoft\CertificadoMiembroEmpresaE
 ec\gob\firmadigital\libreria\certificate\ec\securitydata\CertificadoSecurityDataFactory.class
 ec\gob\firmadigital\libreria\certificate\ec\bce\CertificadoPersonaNaturalBancoCentral.class
 ec\gob\firmadigital\libreria\certificate\ec\argosdata\CertificadoPersonaNaturalArgosData.class
+interfaces\frmVisualizadorDocumento$6.class
 ec\gob\firmadigital\libreria\certificate\ec\eclipsoft\CertificadoEclipsoft.class
 ec\gob\firmadigital\libreria\certificate\ValidationResult.class
 ec\gob\firmadigital\libreria\sign\pdf\BasePdfSigner.class
@@ -112,7 +114,6 @@ ec\gob\firmadigital\libreria\exceptions\AliasesNotFoundException.class
 ec\gob\firmadigital\libreria\sign\BaseSigner.class
 ec\gob\firmadigital\libreria\certificate\ec\datil\CertificadoDatil.class
 ec\gob\firmadigital\libreria\certificate\ec\alphatechnologies\AlphaTechnologiesSubCaCert20232026.class
-interfaces\frmFirma.class
 ec\gob\firmadigital\libreria\certificate\ec\anfac\CertificadoPersonaJuridicaAnfAc37442.class
 ec\gob\firmadigital\libreria\certificate\ec\digercic\DigercicSubCaCert20212031.class
 ec\gob\firmadigital\libreria\utils\BouncyCastleUtils$1.class
@@ -120,11 +121,12 @@ ec\gob\firmadigital\libreria\utils\MimeHelper.class
 ec\gob\firmadigital\libreria\certificate\ec\firmasegura\FirmaSeguraSubCaCert20232043.class
 ec\gob\firmadigital\libreria\certificate\ec\securitydata\SecurityDataSubCaCert20202039.class
 ec\gob\firmadigital\libreria\utils\OcspUtils.class
-interfaces\frmFirma$1.class
+interfaces\frmVisualizadorDocumento$5.class
 ec\gob\firmadigital\libreria\exceptions\OcspTimeoutException.class
 ec\gob\firmadigital\libreria\sign\SignConstants.class
 ec\gob\firmadigital\libreria\certificate\ec\anfac\AnfAc18332CaCert20162036.class
 ec\gob\firmadigital\libreria\certificate\ec\uanataca\CertificadoRepresentanteLegalUanataca.class
+interfaces\frmDatosFirmante$5.class
 ec\gob\firmadigital\libreria\model\Document.class
 ec\gob\firmadigital\libreria\keystore\EPass2003LinuxKeyStoreProvider.class
 ec\gob\firmadigital\libreria\keystore\UKCGenericAppleKeyStoreProvider.class
@@ -137,12 +139,13 @@ ec\gob\firmadigital\libreria\sign\xades\InvalidXMLException.class
 ec\gob\firmadigital\libreria\utils\PropertiesTsa.class
 ec\gob\firmadigital\libreria\exceptions\OcspValidationException.class
 ec\gob\firmadigital\libreria\sign\cms\VerificadorCMS.class
-interfaces\frmFirma$5.class
+interfaces\frmVisualizadorDocumento$1.class
 ec\gob\firmadigital\libreria\keystore\FileKeyStoreProvider.class
 ec\gob\firmadigital\libreria\certificate\ec\CertificadoPersonaNatural.class
 ec\gob\firmadigital\libreria\certificate\ec\firmasegura\CertificadoFirmaSeguraFactory.class
 ec\gob\firmadigital\libreria\exceptions\ConexionApiException.class
 ec\gob\firmadigital\libreria\core\Util.class
+interfaces\frmVisualizadorDocumento$7.class
 ec\gob\firmadigital\libreria\certificate\ec\eclipsoft\CertificadoPersonalNaturalEclipsoft.class
 ec\gob\firmadigital\libreria\exceptions\CertificadoInvalidoException.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\LazzateSubCaWeGoCert.class
@@ -151,7 +154,6 @@ ec\gob\firmadigital\libreria\certificate\ec\securitydata\CertificadoRepresentant
 ec\gob\firmadigital\libreria\sign\pdf\BasePdfHashSigner.class
 ec\gob\firmadigital\libreria\certificate\ec\anfac\CertificadoAnfAc18332Factory.class
 ec\gob\firmadigital\libreria\xml\Utils.class
-interfaces\frmVisualizadorPDF$6.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\CertificadoPersonaNaturalLazzate.class
 ec\gob\firmadigital\libreria\certificate\ec\digercic\DigercicCaCert.class
 ec\gob\firmadigital\libreria\sign\pdf\PDFSignerItext$1.class
@@ -173,6 +175,7 @@ ec\gob\firmadigital\libreria\utils\Utils.class
 ec\gob\firmadigital\libreria\exceptions\HoraServidorException.class
 ec\gob\firmadigital\libreria\certificate\ec\securitydata\SecurityDataCaCert.class
 ec\gob\firmadigital\libreria\keystore\Bit4IdGenericAppleKeyStoreProvider.class
+interfaces\frmVisualizadorDocumento$2.class
 ec\gob\firmadigital\libreria\exceptions\ConexionException.class
 ec\gob\firmadigital\libreria\utils\OfficeAnalizer.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\CertificadoPersonaJuridicaLazzate.class
@@ -180,7 +183,6 @@ ec\gob\firmadigital\libreria\certificate\ec\datil\CertificadoRepresentanteLegalD
 ec\gob\firmadigital\libreria\certificate\ec\CertificadoSelladoTiempo.class
 ec\gob\firmadigital\libreria\ocsp\ValidateCertUseOCSP.class
 ec\gob\firmadigital\libreria\sign\xades\EscapeHelper.class
-interfaces\frmVisualizadorPDF$1.class
 ec\gob\firmadigital\libreria\sign\PrivateKeySigner.class
 ec\gob\firmadigital\libreria\certificate\ec\cj\CertificadoPersonaJuridicaPrivadaConsejoJudicatura.class
 ec\gob\firmadigital\libreria\certificate\ec\securitydata\CertificadoPruebaSecurityData.class
@@ -196,7 +198,6 @@ ec\gob\firmadigital\libreria\certificate\ec\anfac\CertificadoAnfAc37442Factory.c
 ec\gob\firmadigital\libreria\keystore\KeyStoreProvider.class
 ec\gob\firmadigital\libreria\xml\FileUtils$1.class
 ec\gob\firmadigital\libreria\certificate\ec\anfac\CertificadoPersonaNaturalAnfAc18332.class
-interfaces\frmFirma$4.class
 ec\gob\firmadigital\libreria\sign\pdf\PadesHashSigner.class
 ec\gob\firmadigital\libreria\certificate\ec\anfac\AnfAc37442CaCert20192039.class
 ec\gob\firmadigital\libreria\utils\Json.class
@@ -217,8 +218,8 @@ ec\gob\firmadigital\libreria\keystore\KeyStoreUtilities.class
 ec\gob\firmadigital\libreria\sign\DigestAlgorithm.class
 ec\gob\firmadigital\libreria\sign\pdf\PDFSignerItext.class
 ec\gob\firmadigital\libreria\certificate\ec\digercic\CertificadoDigercicFactory.class
+interfaces\frmDatosFirmante$1.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\LazzateCa2Cert.class
-interfaces\frmVisualizadorPDF$7.class
 ec\gob\firmadigital\libreria\sign\EncryptionAlgorithm.class
 ec\gob\firmadigital\libreria\certificate\ec\cj\CertificadoConsejoJudicaturaDataFactory.class
 ec\gob\firmadigital\libreria\certificate\ec\argosdata\ArgosDataSubCaCert.class
@@ -247,6 +248,7 @@ ec\gob\firmadigital\libreria\utils\CertificateUtils.class
 ec\gob\firmadigital\libreria\certificate\ec\eclipsoft\CertificadoEclipsoftDataFactory.class
 ec\gob\firmadigital\libreria\certificate\ec\corpnewbest\CorpNewBestSubCa1_20232033Cert.class
 ec\gob\firmadigital\libreria\keystore\AppleKeyStoreProvider.class
+interfaces\frmVisualizadorDocumento.class
 ec\gob\firmadigital\libreria\certificate\ec\eclipsoft\CertificadoRepresentanteLegalEclipsoft.class
 ec\gob\firmadigital\libreria\sign\SignValidity$VALIDITY_ERROR.class
 ec\gob\firmadigital\libreria\sign\xades\CustomUriDereferencer.class
@@ -265,10 +267,10 @@ ec\gob\firmadigital\libreria\certificate\ec\bce\CertificadoBancoCentralFactory.c
 ec\gob\firmadigital\libreria\exceptions\SignatureVerificationException.class
 ec\gob\firmadigital\libreria\sign\pdf\PadesLtvSigner.class
 ec\gob\firmadigital\libreria\sign\pdf\PdfSigner.class
-interfaces\frmVisualizadorPDF$5.class
 ec\gob\firmadigital\libreria\certificate\ec\datil\CertificadoEmpresaDatil.class
 ec\gob\firmadigital\libreria\certificate\ec\uanataca\CertificadoMiembroEmpresaUanataca.class
 ec\gob\firmadigital\libreria\keystore\SafenetIKey2032LinuxKeyStoreProvider.class
+interfaces\frmDatosFirmante.class
 ec\gob\firmadigital\libreria\sign\pdf\PDFSignerItext$MyExternalSignatureContainer.class
 ec\gob\firmadigital\libreria\certificate\ec\datil\CertificadoPersonaJuridicaPrivadaDatil.class
 ec\gob\firmadigital\libreria\certificate\ec\lazzate\LazzateCaCert.class
@@ -277,9 +279,7 @@ ec\gob\firmadigital\libreria\sign\XMLConstants.class
 ec\gob\firmadigital\libreria\certificate\ec\securitydata\CertificadoFuncionarioPublicoSecurityData.class
 ec\gob\firmadigital\libreria\utils\X509CertificateUtils.class
 ec\gob\firmadigital\libreria\certificate\ec\corpnewbest\CorpNewBestCaCert.class
-interfaces\frmVisualizadorPDF.class
 ec\gob\firmadigital\libreria\validaciones\Extensiones.class
-interfaces\frmVisualizadorPDF$4.class
 ec\gob\firmadigital\libreria\keystore\EPass2003AppleKeyStoreProvider.class
 ec\gob\firmadigital\libreria\utils\OsUtils.class
 ec\gob\firmadigital\libreria\core\PrivateKeyAndCertificateChain.class
