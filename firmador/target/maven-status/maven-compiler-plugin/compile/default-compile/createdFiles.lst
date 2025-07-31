@@ -137,6 +137,7 @@ ec\gob\firmadigital\libreria\sign\xades\InvalidXMLException.class
 ec\gob\firmadigital\libreria\utils\PropertiesTsa.class
 ec\gob\firmadigital\libreria\exceptions\OcspValidationException.class
 ec\gob\firmadigital\libreria\sign\cms\VerificadorCMS.class
+interfaces\frmFirma$5.class
 ec\gob\firmadigital\libreria\keystore\FileKeyStoreProvider.class
 ec\gob\firmadigital\libreria\certificate\ec\CertificadoPersonaNatural.class
 ec\gob\firmadigital\libreria\certificate\ec\firmasegura\CertificadoFirmaSeguraFactory.class
